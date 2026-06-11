@@ -6,12 +6,17 @@ const app = express();
 app.use(express.json());
 
 // Sonde de sante : verifie que l'app ET la base repondent
-app.get('/health', async (req, res, next) => {
+app.get('/health', async (req, res) => {
   try {
     await pool.query('SELECT 1');
     res.json({ status: 'ok' });
   } catch (err) {
-    next(err);
+    console.error('health/db:', err);
+    res.status(500).json({
+      status: 'error',
+      message: err.message || String(err),
+      code: err.code,
+    });
   }
 });
 
