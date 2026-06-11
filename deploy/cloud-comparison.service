@@ -1,0 +1,15 @@
+[Unit]
+Description=cloud-comparison API (POC IaaS)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=anaisaoucher1
+WorkingDirectory=/home/anaisaoucher1/cloud-comparison
+Environment=PORT=3000
+Environment=DATABASE_URL=postgres://cloud:cloud@localhost:5432/cloud_comparison
+ExecStart=/usr/bin/node src/app.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+{
+  "name": "cloud-comparison",
+  "version": "1.0.0",
+  "description": "POC CRUD identique pour comparer les modeles de service cloud IaaS, PaaS et SaaS",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "init-db": "node src/init-db.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.12.0"
+  }
+}
