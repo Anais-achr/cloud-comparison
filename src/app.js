@@ -12,10 +12,18 @@ app.get('/health', async (req, res) => {
     res.json({ status: 'ok' });
   } catch (err) {
     console.error('health/db:', err);
+    let dbHost = 'non-defini';
+    try {
+      dbHost = new URL(process.env.DATABASE_URL || '').hostname;
+    } catch (_) {
+      dbHost = 'url-invalide';
+    }
     res.status(500).json({
       status: 'error',
       message: err.message || String(err),
       code: err.code,
+      dbHost,
+      hasDatabaseUrl: Boolean(process.env.DATABASE_URL),
     });
   }
 });
